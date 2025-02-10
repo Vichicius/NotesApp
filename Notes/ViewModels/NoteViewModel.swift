@@ -9,9 +9,19 @@ import Foundation
 import SwiftUI
 
 class NoteListViewModel: ObservableObject {
-    @Published var currentNote: Note?
-    @Published var titleInput: String = ""
-    @Published var textInput: String = ""
+    @Published var currentNote: Note = Note()
     @Published var notes: [Note] = []
 
+    func saveNote() {
+        notes.append(currentNote)
+    }
+    
+    func removeNote(id: UUID) {
+        notes.removeAll { $0.id == id }
+    }
+    
+    func createNewNote() {
+        currentNote = Note()
+    }
+    
 }

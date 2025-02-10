@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteListView: View {
     
-    @State var notes = [Note(title: "First Note", text: "This is the first note"), Note(title: "Second Note", text: "This is the second note")]
+    @State var notes: [Note]
     
     var body: some View {
         List(notes) { note in
@@ -25,5 +25,5 @@ struct NoteListView: View {
 }
 
 #Preview {
-    NoteListView()
+    NoteListView(notes: [Note(title: "First Note", text: "This is the first note"), Note(title: "Second Note", text: "This is the second note")])
 }

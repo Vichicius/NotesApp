@@ -25,11 +25,12 @@ struct NoteTextView: View {
                         .padding(.leading, 5)
                         .padding(.top, 8)
                         .font(.system(size: 18))
+                        .foregroundStyle(.gray)
+
                     Spacer()
                 }
             }
         }
-        .foregroundStyle(.gray)
     }
 }
 

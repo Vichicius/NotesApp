@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-class Note: Identifiable {
+class Note {
     var id = UUID()
     var title: String
     var text: String
     
-    init(title: String, text: String) {
+    init(title: String = "", text: String = "") {
         self.title = title
         self.text = text
     }
