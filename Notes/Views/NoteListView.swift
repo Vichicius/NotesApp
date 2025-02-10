@@ -6,31 +6,28 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NoteListView: View {
     
-    @State var notes: [Note]
-    @EnvironmentObject var viewModel: NoteListViewModel
+    @Query var notes: [Note]
+    var viewModel: NoteEditorViewModel
 
     var body: some View {
-        let sortedNotes = notes.sorted(by: { $0.modifiedDate > $1.modifiedDate })
-        
-        List(sortedNotes) { note in
-            NoteListRowView(note: note)
-                .onTapGesture {
-                    viewModel.currentNote = note
-                    viewModel.isPresentingNoteListView = false
-                }
+        List {
+            ForEach(notes.sorted { $0.modifiedDate > $1.modifiedDate }) { note in
+                NoteListRowView(note: note)
+                    .onTapGesture {
+                        viewModel.currentNote = note
+                        viewModel.isPresentingNoteListView = false
+                    }
+            }
         }
     }
 }
 
-#Preview {
-    NoteListView(notes: [Note(title: "First Note", text: "This is the first note"), Note(title: "Second Note", text: "This is the second note")])
-}
-
 struct NoteListRowView: View {
-    @State var note: Note
+    var note: Note
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

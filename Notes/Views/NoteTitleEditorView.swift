@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NoteTitleView: View {
     
-    @EnvironmentObject var noteListViewModel: NoteListViewModel
-
     @Binding var titleInput: String
+    
+    var noteListViewModel: NoteEditorViewModel
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -32,8 +33,4 @@ struct NoteTitleView: View {
             
         }
     }
-}
-
-#Preview {
-    NoteTitleView(titleInput: .constant("Title"))
 }

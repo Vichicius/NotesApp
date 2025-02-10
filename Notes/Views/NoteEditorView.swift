@@ -1,22 +1,25 @@
 //
-//  ContentView.swift
+//  NoteEditorView.swift
 //  Notes
 //
 //  Created by Luis Martinez on 9/2/25.
 //
 
 import SwiftUI
+import SwiftData
 
-struct ContentView: View {
+struct NoteEditorView: View {
     
-    @EnvironmentObject var viewModel: NoteListViewModel
-            
+    @EnvironmentObject var viewModel: NoteEditorViewModel
+    
+    @Query var notes: [Note]
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    NoteTitleView(titleInput: $viewModel.currentNote.title)
-                    NoteTextView(textInput: $viewModel.currentNote.text)
+                    NoteTitleView(titleInput: $viewModel.currentNote.title, noteListViewModel: viewModel)
+                    NoteTextView(textInput: $viewModel.currentNote.text, noteListViewModel: viewModel)
                 }
                 .padding()
             }
@@ -55,7 +58,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $viewModel.isPresentingNoteListView) {
-                NoteListView(notes: viewModel.notes)
+                NoteListView(viewModel: viewModel)
                     .presentationDragIndicator(.visible)
                     .presentationDetents([.medium, .large])
             }
@@ -65,6 +68,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    NoteEditorView()
 }
 

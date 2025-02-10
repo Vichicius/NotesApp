@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
-
+import SwiftData
+ 
+@Model
 class Note {
-    var id = UUID()
+    @Attribute(.unique) var id: UUID = UUID()
     var modifiedDate: Date = Date()
     var title: String
     var text: String

@@ -6,16 +6,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct NotesApp: App {
-    
-    @StateObject private var noteListViewModel = NoteListViewModel()
+        
+    let modelContainer: ModelContainer
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(noteListViewModel)
+            NoteEditorView()
+                .environmentObject(NoteEditorViewModel(modelContext: modelContainer.mainContext))
+                .modelContainer(modelContainer)
+        }
+    }
+    
+    init() {
+        do {
+            modelContainer = try ModelContainer(for: Note.self)
+        } catch {
+            fatalError("Error initializing ModelContext")
         }
     }
 }
