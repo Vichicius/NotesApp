@@ -9,10 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel = NoteListViewModel()
-    
-    @State var isPresentingNoteListView = false
-        
+    @EnvironmentObject var viewModel: NoteListViewModel
+            
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -29,7 +27,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                        isPresentingNoteListView = true
+                        viewModel.isPresentingNoteListView = true
                     }) {
                         Label("Note list", systemImage: "line.horizontal.3")
                             .foregroundStyle(.black, .black)
@@ -56,7 +54,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isPresentingNoteListView) {
+            .sheet(isPresented: $viewModel.isPresentingNoteListView) {
                 NoteListView(notes: viewModel.notes)
                     .presentationDragIndicator(.visible)
                     .presentationDetents([.medium, .large])

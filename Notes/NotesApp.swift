@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct NotesApp: App {
+    
+    @StateObject private var noteListViewModel = NoteListViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(noteListViewModel)
         }
     }
 }

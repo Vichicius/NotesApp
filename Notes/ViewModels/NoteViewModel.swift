@@ -12,6 +12,8 @@ class NoteListViewModel: ObservableObject {
     @Published var currentNote: Note = Note()
     @Published var notes: [Note] = []
 
+    @Published var isPresentingNoteListView = false
+
     func saveNote() {
         notes.append(currentNote)
     }
