@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NoteTextView: View {
     
+    @EnvironmentObject var noteListViewModel: NoteListViewModel
     @Binding var textInput: String
     
     var body: some View {
@@ -18,7 +19,10 @@ struct NoteTextView: View {
                 .font(.system(size: 18))
                 .scrollDisabled(true)
                 .frame(minHeight: UIScreen.main.bounds.height - 200)
-
+                .onChange(of: textInput) {
+                    noteListViewModel.saveNote()
+                }
+            
             if textInput.isEmpty {
                 VStack {
                     Text("Start writing a note...")

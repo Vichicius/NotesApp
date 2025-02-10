@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NoteTitleView: View {
     
+    @EnvironmentObject var noteListViewModel: NoteListViewModel
+
     @Binding var titleInput: String
     
     var body: some View {
@@ -19,7 +21,10 @@ struct NoteTitleView: View {
                 .bold()
                 .frame(minHeight: 50)
                 .fixedSize(horizontal: false, vertical: true)
-            
+                .onChange(of: titleInput) {
+                    noteListViewModel.saveNote()
+                }
+
             Text(titleInput.isEmpty ? "Title" : " ")
                 .padding(.leading, 5)
                 .font(.title)

@@ -9,6 +9,7 @@ import SwiftUI
 
 class Note {
     var id = UUID()
+    var modifiedDate: Date = Date()
     var title: String
     var text: String
     
@@ -17,4 +18,3 @@ class Note {
         self.text = text
     }
 }
-

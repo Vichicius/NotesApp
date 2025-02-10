@@ -13,7 +13,9 @@ struct NoteListView: View {
     @EnvironmentObject var viewModel: NoteListViewModel
 
     var body: some View {
-        List(notes) { note in
+        let sortedNotes = notes.sorted(by: { $0.modifiedDate > $1.modifiedDate })
+        
+        List(sortedNotes) { note in
             NoteListRowView(note: note)
                 .onTapGesture {
                     viewModel.currentNote = note
@@ -31,12 +33,15 @@ struct NoteListRowView: View {
     @State var note: Note
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(note.title)
+        VStack(alignment: .leading, spacing: 8) {
+            Text(note.title.isEmpty ? "Title" : note.title)
                 .font(.title)
                 .bold()
+                .lineLimit(1)
+
             Text(note.text)
                 .font(.body)
+                .lineLimit(2)
         }
     }
     

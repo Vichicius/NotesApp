@@ -15,6 +15,12 @@ class NoteListViewModel: ObservableObject {
     @Published var isPresentingNoteListView = false
 
     func saveNote() {
+        if currentNote.title.isEmpty && currentNote.text.isEmpty {
+            return
+        }
+        
+        notes.removeAll { $0.id == currentNote.id }
+        currentNote.modifiedDate = Date()
         notes.append(currentNote)
     }
     
