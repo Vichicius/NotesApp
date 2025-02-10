@@ -17,6 +17,7 @@ struct NoteTitleView: View {
             TextEditor(text: $titleInput)
                 .font(.title)
                 .bold()
+                .frame(minHeight: 50)
                 .fixedSize(horizontal: false, vertical: true)
             
             Text(titleInput.isEmpty ? "Title" : " ")
@@ -26,4 +27,8 @@ struct NoteTitleView: View {
             
         }
     }
+}
+
+#Preview {
+    NoteTitleView(titleInput: .constant("Title"))
 }
