@@ -44,6 +44,10 @@ class NoteEditorViewModel: ObservableObject {
         } catch {
             print("Error deleting note: \(error)")
         }
+        
+        if currentNote.id == id {
+            createNewNote()
+        }
     }
     
     func createNewNote() {

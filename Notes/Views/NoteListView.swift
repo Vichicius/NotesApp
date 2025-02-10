@@ -5,6 +5,7 @@
 //  Created by Luis Martinez on 10/2/25.
 //
 
+import Foundation
 import SwiftUI
 import SwiftData
 
@@ -21,6 +22,13 @@ struct NoteListView: View {
                         viewModel.currentNote = note
                         viewModel.isPresentingNoteListView = false
                     }
+            }
+            .onDelete { IndexSet in
+                if let index = IndexSet.first {
+                    let notes = notes.sorted { $0.modifiedDate > $1.modifiedDate }
+                    let noteId = notes[index].id
+                    viewModel.removeNote(id: noteId)
+                }
             }
         }
     }
